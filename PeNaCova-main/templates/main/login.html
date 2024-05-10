@@ -1,0 +1,72 @@
+{% extends "basepnc.html" %}
+
+{% block conteudo %}
+{% if not logado: %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-5 py-1">
+        <div class="card my-5" style="background-color: rgb(71, 57, 36);">
+          <div class="card-body text-light">
+            <h2 class="card-title text-center mb-4">Login</h2>
+            <h2 class="card-title text-center mb-3"><img width="90px" height="100px" src="/static/img/download.png">
+            </h2>
+            <form method="post">
+              <div class="mb-3 bi-envelope-at-fill">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" placeholder="Digite seu Email" class="form-control" id="email" name="email">
+                <span class="text-warning d-none small"></span>
+              </div>
+              <div class="mb-3 bi-lock-fill">
+                <label for="senha" class="form-label">Senha</label>
+                <input type="password" placeholder="Digite sua senha" class="form-control" id="senha" name="senha">
+                <span class="text-warning d-none small"></span>
+              </div>
+              <div class="text-center ">
+                <button type="reset" class="btn btn-secondary btn-lg">Cancelar</button>
+                <button type="submit" class="btn btn-success btn-lg">Entrar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endif %}
+
+<!-- Modal Alterar Senha -->
+<div class="modal fade" id="senhaModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content marrom">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <h1 class="fw-bold mb-0 fs-2 text-light">Alterar senha</h1>
+            </div>
+            <div class="modal-body p-5 pt-0">
+                <form class="">
+
+                    <div class="input-group mb-3">
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="floatingInputGroup3"
+                                placeholder="nome@email.com">
+                            <label for="floatingInputGroup1">Insira seu email</label>
+                        </div>
+                    </div>
+                    <button class="w-100 my-3 btn btn-lg rounded-3 verde text-light" type="submit">Enviar</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default text-light" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if erros and valores %}
+<script>
+  const validationErrors = {{ erros|tojson }}
+  const fieldValues = {{ valores|tojson }}
+</script>
+<script src="/static/js/formValidation.js"></script>
+{% endif %}
+
+{% endblock %}
